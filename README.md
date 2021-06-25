@@ -1,0 +1,3 @@
+# Inventory
+
+Track product inventory.

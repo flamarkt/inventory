@@ -1,0 +1,47 @@
+{
+    "name": "flamarkt/inventory",
+    "description": "Inventory management for Flamarkt products.",
+    "keywords": [
+        "flarum",
+        "flamarkt",
+        "marketplace",
+        "ecommerce",
+        "inventory"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.0",
+        "flamarkt/core": "^0.1.0"
+    },
+    "authors": [
+        {
+            "name": "Flamarkt",
+            "homepage": "https://flamarkt.org/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/flamarkt/inventory/issues",
+        "source": "https://github.com/flamarkt/inventory"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flamarkt\\Inventory\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Inventory",
+            "category": "flamarkt",
+            "icon": {
+                "name": "fas fa-calculator",
+                "backgroundColor": "#266a13",
+                "color": "#fff"
+            }
+        },
+        "flamarkt-backoffice": {
+            "showInBackoffice": true,
+            "hideFromAdmin": true
+        }
+    }
+}
