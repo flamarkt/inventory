@@ -3,6 +3,7 @@
 namespace Flamarkt\Inventory;
 
 use Flamarkt\Core\Api\Serializer\ProductSerializer;
+use Flamarkt\Core\Extend\Availability;
 use Flarum\Extend;
 use Flarum\User\User;
 
@@ -31,4 +32,7 @@ return [
 
     (new Extend\ModelVisibility(History::class))
         ->scope(Scope\View::class),
+
+    (new Availability)
+        ->driver('inventory', InventoryAvailabilityDriver::class),
 ];
