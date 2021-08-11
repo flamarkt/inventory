@@ -28,7 +28,7 @@ app.initializers.add('flamarkt-inventory', () => {
 
     extend(ProductShowPage.prototype, 'fields', function (this: ProductShowPage, fields: ItemList) {
         fields.add('balance', m('.Form-group', [
-            m('local', 'Inventory'),
+            m('label', 'Inventory'),
             m('input.FormControl', {
                 type: 'number',
                 value: this.product.attribute('inventory'),
