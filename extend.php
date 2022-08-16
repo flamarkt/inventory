@@ -15,7 +15,7 @@ return [
 
     (new Extend\Routes('api'))
         ->get('/flamarkt/inventory', 'flamarkt.inventory.index', Api\Controller\HistoryIndexController::class)
-        ->post('/flamarkt/products/{id:[0-9]+}/inventory', 'flamarkt.inventory.store', Api\Controller\HistoryStoreController::class)
+        ->post('/flamarkt/products/{id}/inventory', 'flamarkt.inventory.store', Api\Controller\HistoryStoreController::class)
         ->patch('/flamarkt/inventory/{id:[0-9]+}', 'flamarkt.inventory.update', Api\Controller\HistoryUpdateController::class)
         ->delete('/flamarkt/inventory/{id:[0-9]+}', 'flamarkt.inventory.delete', Api\Controller\HistoryDeleteController::class),
 

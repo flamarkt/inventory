@@ -39,7 +39,7 @@ class HistoryStoreController extends AbstractCreateController
 
         $productId = Arr::get($request->getQueryParams(), 'id');
 
-        $product = $this->repository->findOrFail($productId, $actor);
+        $product = $this->repository->findUidOrFail($productId, $actor);
 
         $attributes = Arr::get($request->getParsedBody(), 'data.attributes', []);
 

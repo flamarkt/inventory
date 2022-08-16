@@ -1,1 +1,4 @@
 flamarkt-inventory:
+    backoffice:
+        adjust:
+            title: Adjust inventory

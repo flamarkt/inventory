@@ -1,20 +1,34 @@
-import Modal from 'flarum/common/components/Modal';
+import {Children} from 'mithril';
+import Modal, {IInternalModalAttrs} from 'flarum/common/components/Modal';
 import ItemList from 'flarum/common/utils/ItemList';
 import Button from 'flarum/common/components/Button';
 import Select from 'flarum/common/components/Select';
+import Product from 'flamarkt/core/common/models/Product';
 
-export default class AdjustInventoryModal extends Modal {
+interface AdjustInventoryModalAttrs extends IInternalModalAttrs {
+    product: Product
+}
+
+export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttrs> {
     operation: 'add' | 'set' | 'null' = 'add';
     amount: number = 0;
     comment: string = '';
     saving: boolean = false;
 
+    className() {
+        return 'AdjustInventoryModal';
+    }
+
+    title() {
+        return app.translator.trans('flamarkt-inventory.backoffice.adjust.title');
+    }
+
     content() {
         return m('.Modal-body', this.fields().toArray());
     }
 
-    fields(): ItemList {
-        const fields = new ItemList();
+    fields(): ItemList<Children> {
+        const fields = new ItemList<Children>();
 
         fields.add('operation', m('.Form-group', [
             m('local', 'Operation'),
@@ -44,7 +58,7 @@ export default class AdjustInventoryModal extends Modal {
                 type: 'number',
                 value: this.operation === 'null' ? '' : this.amount,
                 onchange: (event: Event) => {
-                    this.amount = (event.target as HTMLInputElement).value;
+                    this.amount = parseInt((event.target as HTMLInputElement).value);
                 },
                 disabled: this.saving || this.operation === 'null',
             }),
@@ -80,7 +94,7 @@ export default class AdjustInventoryModal extends Modal {
         };
     }
 
-    onsubmit(event) {
+    onsubmit(event: Event) {
         event.preventDefault();
 
         this.saving = true;
