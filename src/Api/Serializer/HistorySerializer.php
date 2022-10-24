@@ -2,9 +2,9 @@
 
 namespace Flamarkt\Inventory\Api\Serializer;
 
+use Flamarkt\Core\Api\Serializer\ProductSerializer;
 use Flamarkt\Inventory\History;
 use Flamarkt\Core\Api\Serializer\BasicOrderSerializer;
-use Flamarkt\Core\Api\Serializer\BasicProductSerializer;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Tobscure\JsonApi\Relationship;
@@ -29,7 +29,8 @@ class HistorySerializer extends AbstractSerializer
 
     public function product($history): ?Relationship
     {
-        return $this->hasOne($history, BasicProductSerializer::class);
+        // Use complete product serializer because the only time this relation is useful is to refresh the product data
+        return $this->hasOne($history, ProductSerializer::class);
     }
 
     public function order($history): ?Relationship

@@ -7,7 +7,7 @@ interface InventoryAmountAttrs {
 export default class InventoryAmount extends Component<InventoryAmountAttrs> {
     view() {
         if (this.attrs.amount === null) {
-            return m('em', 'not tracked');
+            return m('em', app.translator.trans('flamarkt-inventory.backoffice.amount.notTracked'));
         }
 
         // Case number to string including zeros

@@ -14,7 +14,7 @@ class HistoryDeleteController extends AbstractDeleteController
     {
         RequestUtil::getActor($request)->assertCan('backoffice');
 
-        $id = Arr::get($request->getQueryParams(), 'id');
+        $id = (string)Arr::get($request->getQueryParams(), 'id');
 
         /**
          * @var History $history

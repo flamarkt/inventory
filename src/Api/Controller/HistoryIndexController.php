@@ -21,6 +21,7 @@ class HistoryIndexController extends AbstractListController
         'user',
     ];
 
+    // Don't include product by default because this will usually be loaded on the product page where the product is already loaded
     public $optionalInclude = [
         'product',
     ];

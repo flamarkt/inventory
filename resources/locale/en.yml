@@ -1,4 +1,15 @@
 flamarkt-inventory:
     backoffice:
-        adjust:
-            title: Adjust inventory
+        products:
+            head:
+                inventory: => flamarkt-inventory.ref.inventory
+            field:
+                inventory: => flamarkt-inventory.ref.inventory
+                inventoryNotTrackedPlaceholder: => flamarkt-inventory.ref.notTracked
+            adjust: Adjust inventory
+        amount:
+            notTracked: => flamarkt-inventory.ref.notTracked
+
+    ref:
+        inventory: Inventory
+        notTracked: Not tracked

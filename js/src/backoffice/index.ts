@@ -15,7 +15,7 @@ app.initializers.add('flamarkt-inventory', () => {
     app.store.models['flamarkt-inventory-history'] = History;
 
     extend(ProductList.prototype, 'head', function (columns) {
-        columns.add('inventory', m('th', 'Inventory'));
+        columns.add('inventory', m('th', app.translator.trans('flamarkt-inventory.backoffice.products.head.inventory')));
     });
 
     extend(ProductList.prototype, 'columns', function (columns, product) {
@@ -25,12 +25,15 @@ app.initializers.add('flamarkt-inventory', () => {
     });
 
     extend(ProductShowPage.prototype, 'fields', function (fields) {
+        const value = this.product!.attribute('inventory');
+
         fields.add('balance', m('.Form-group', [
-            m('label', 'Inventory'),
+            m('label', app.translator.trans('flamarkt-inventory.backoffice.products.field.inventory')),
             m('input.FormControl', {
                 type: 'number',
-                value: this.product!.attribute('inventory'),
+                value,
                 readonly: true,
+                placeholder: value === null ? app.translator.trans('flamarkt-inventory.backoffice.products.field.inventoryNotTrackedPlaceholder') : '',
             }),
             Button.component({
                 className: 'Button',
@@ -39,7 +42,7 @@ app.initializers.add('flamarkt-inventory', () => {
                         product: this.product,
                     });
                 },
-            }, 'Update inventory'),
+            }, app.translator.trans('flamarkt-inventory.backoffice.products.adjust')),
         ]));
     });
 });

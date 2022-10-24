@@ -4,13 +4,14 @@ import ItemList from 'flarum/common/utils/ItemList';
 import Button from 'flarum/common/components/Button';
 import Select from 'flarum/common/components/Select';
 import Product from 'flamarkt/core/common/models/Product';
+import {ApiPayloadSingle} from 'flarum/common/Store';
 
 interface AdjustInventoryModalAttrs extends IInternalModalAttrs {
     product: Product
 }
 
 export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttrs> {
-    operation: 'add' | 'set' | 'null' = 'add';
+    operation: 'add' | 'set' | 'untrack' = 'add';
     amount: number = 0;
     comment: string = '';
     saving: boolean = false;
@@ -31,12 +32,12 @@ export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttr
         const fields = new ItemList<Children>();
 
         fields.add('operation', m('.Form-group', [
-            m('local', 'Operation'),
+            m('label', 'Operation'),
             Select.component({
                 options: {
                     add: 'Add',
                     set: 'Set',
-                    null: 'Untrack',
+                    untrack: 'Untrack',
                 },
                 value: this.operation,
                 onchange: (value: 'add' | 'set') => {
@@ -53,19 +54,19 @@ export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttr
         ]));
 
         fields.add('amount', m('.Form-group', [
-            m('local', 'Amount'),
+            m('label', 'Amount'),
             m('input.FormControl', {
                 type: 'number',
-                value: this.operation === 'null' ? '' : this.amount,
+                value: this.operation === 'untrack' ? '' : this.amount,
                 onchange: (event: Event) => {
                     this.amount = parseInt((event.target as HTMLInputElement).value);
                 },
-                disabled: this.saving || this.operation === 'null',
+                disabled: this.saving || this.operation === 'untrack',
             }),
         ]));
 
         fields.add('comment', m('.Form-group', [
-            m('local', 'Comment'),
+            m('label', 'Comment'),
             m('textarea.FormControl', {
                 value: this.comment,
                 onchange: (event: Event) => {
@@ -99,7 +100,7 @@ export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttr
 
         this.saving = true;
 
-        app.request({
+        app.request<ApiPayloadSingle>({
             method: 'POST',
             url: app.forum.attribute('apiUrl') + '/flamarkt/products/' + this.attrs.product.id() + '/inventory',
             body: {
@@ -107,7 +108,10 @@ export default class AdjustInventoryModal extends Modal<AdjustInventoryModalAttr
                     attributes: this.data(),
                 },
             },
-        }).then(() => {
+        }).then(response => {
+            // Parse response to update product model
+            app.store.pushPayload(response);
+
             this.saving = false;
 
             m.redraw();
