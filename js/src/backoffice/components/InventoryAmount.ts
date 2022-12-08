@@ -1,3 +1,4 @@
+import app from 'flamarkt/backoffice/backoffice/app';
 import Component from 'flarum/common/Component';
 
 interface InventoryAmountAttrs {

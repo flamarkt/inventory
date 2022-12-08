@@ -1,10 +1,11 @@
-import History from './models/History';
+import app from 'flamarkt/backoffice/backoffice/app';
 import ProductList from 'flamarkt/core/backoffice/components/ProductList';
 import ProductShowPage from 'flamarkt/core/backoffice/pages/ProductShowPage';
 import {extend} from 'flarum/common/extend';
 import Button from 'flarum/common/components/Button';
 import AdjustInventoryModal from './components/AdjustInventoryModal';
 import InventoryAmount from './components/InventoryAmount';
+import History from './models/History';
 import {backoffice} from './compat';
 
 export {

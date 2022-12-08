@@ -1,4 +1,5 @@
 import {Children} from 'mithril';
+import app from 'flamarkt/backoffice/backoffice/app';
 import Modal, {IInternalModalAttrs} from 'flarum/common/components/Modal';
 import ItemList from 'flarum/common/utils/ItemList';
 import Button from 'flarum/common/components/Button';
