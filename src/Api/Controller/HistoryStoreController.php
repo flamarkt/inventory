@@ -25,15 +25,12 @@ class HistoryStoreController extends AbstractCreateController
         'user',
     ];
 
-    protected $repository;
-    protected $validator;
-    protected $db;
-
-    public function __construct(ProductRepository $repository, HistoryValidator $validator, ConnectionInterface $db)
+    public function __construct(
+        protected ProductRepository   $repository,
+        protected HistoryValidator    $validator,
+        protected ConnectionInterface $db
+    )
     {
-        $this->repository = $repository;
-        $this->validator = $validator;
-        $this->db = $db;
     }
 
     protected function data(ServerRequestInterface $request, Document $document)

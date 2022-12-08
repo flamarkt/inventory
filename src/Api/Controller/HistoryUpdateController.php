@@ -22,11 +22,10 @@ class HistoryUpdateController extends AbstractShowController
         'user',
     ];
 
-    protected $validator;
-
-    public function __construct(HistoryValidator $validator)
+    public function __construct(
+        protected HistoryValidator $validator
+    )
     {
-        $this->validator = $validator;
     }
 
     protected function data(ServerRequestInterface $request, Document $document)

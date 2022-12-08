@@ -10,10 +10,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class InventoryAvailabilityDriver implements AvailabilityDriverInterface
 {
-    public function __invoke(Product $product, User $actor, ServerRequestInterface $request = null)
+    public function __invoke(Product $product, User $actor, ServerRequestInterface $request = null): ?string
     {
         if ($product->inventory > 0) {
             return AvailabilityManager::AVAILABLE;
         }
+
+        return null;
     }
 }

@@ -9,11 +9,10 @@ use Illuminate\Database\Query\Builder;
 
 class UserFilter implements FilterInterface
 {
-    protected $users;
-
-    public function __construct(UserRepository $users)
+    public function __construct(
+        protected UserRepository $users
+    )
     {
-        $this->users = $users;
     }
 
     public function getFilterKey(): string
